@@ -1,0 +1,139 @@
+Este código implementa una calculadora básica en JavaScript. Aquí está la explicación línea por línea:
+
+Se inicializan tres variables: runnigTotal (total en ejecución), buffer (almacena el número o la operación actual) y previousOperator (almacena el operador anteriormente seleccionado).
+
+Se imprimen en la consola los valores iniciales de runnigTotal y buffer.
+
+Se obtiene una referencia al elemento HTML con la clase "screen", que se utiliza para mostrar el número o la operación actual.
+
+Se define una función llamada buttonClick(value) que maneja los clics de los botones de la calculadora. Dependiendo del tipo de valor (número o símbolo), se llama a las funciones handleSymbol(symbol) o handleNumber(value). Luego, se actualiza el contenido del elemento HTML "screen" con el valor actual de buffer.
+
+-----------Explicacion-------------------
+Esta función parece ser parte de una aplicación de calculadora o similar, donde se ejecuta cuando se hace clic en un botón. Aquí está la explicación línea por línea:
+
+La función buttonClick toma un parámetro value, que es el valor asociado al botón que se ha hecho clic.
+
+Dentro de la función, se utiliza una declaración if-else para determinar si el value es un número o no. Esto se hace usando la función isNaN() que devuelve true si el valor no es un número y false si es un número.
+
+Si el value no es un número (es decir, si isNaN(value) devuelve true), se llama a la función handleSymbol(value). Esto sugiere que value es un símbolo de operación, como +, -, *, /, etc.
+
+Si el value es un número (es decir, si isNaN(value) devuelve false), se llama a la función handleNumber(value). Esto sugiere que value es un dígito numérico.
+
+Después de llamar a handleSymbol(value) o handleNumber(value), se actualiza el contenido del elemento screen con el valor actual de buffer. Parece que screen es un elemento del DOM que muestra el contenido de la calculadora o la pantalla de salida.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+La función handleSymbol(symbol) maneja los símbolos especiales (por ejemplo, 'C' para borrar, '=' para calcular el resultado, '←' para borrar el último dígito, y los operadores matemáticos). Según el símbolo recibido, se realizan las acciones correspondientes, como restablecer el buffer a '0', calcular el resultado, borrar el último dígito o manejar la operación matemática.
+
+------------Explicacion-------------------
+Esta función de JavaScript handleSymbol parece ser parte de una calculadora o una aplicación similar para manejar símbolos de operación y actualizar los valores correspondientes. Aquí está la explicación línea por línea:
+
+La función handleSymbol toma un parámetro symbol, que es el símbolo de operación que se está manejando.
+
+Dentro de la función, se utiliza una instrucción switch para evaluar el valor de symbol y ejecutar diferentes acciones dependiendo del caso.
+
+En el caso 'C':
+
+Se establece buffer en '0', lo que probablemente indica que se está limpiando el valor actual.
+Se establece runnigTotal en 0, que puede ser el total de la operación actual.
+En el caso '=':
+
+Se verifica si previousOperator es null. Si es así, no hay una operación anterior para ejecutar, por lo que se sale de la función.
+Se ejecuta la función flushOperation con el valor entero de buffer, lo que probablemente realiza la operación pendiente utilizando el operador almacenado en previousOperator.
+Se establece previousOperator en null para indicar que no hay operador pendiente.
+Se actualiza buffer con el valor de runningTotal.
+Se restablece runningTotal a 0.
+En el caso '←':
+
+Se verifica si la longitud de buffer es igual a 1. Si es así, se establece buffer en '0', lo que indica que se está eliminando el último dígito del valor.
+Si la longitud de buffer es mayor que 1, se elimina el último carácter de buffer utilizando substring.
+En el caso de los operadores +, −, ×, y ÷:
+
+Se llama a una función handleMath(symbol) para manejar la operación matemática correspondiente. No está definida en el fragmento de código proporcionado, pero probablemente realice alguna acción relacionada con la operación matemática seleccionada.
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+La función handleMath(symbol) maneja los operadores matemáticos. Si el buffer no está vacío, convierte el buffer en un número entero, luego actualiza el runnigTotal o realiza la operación pendiente con el número del buffer. Finalmente, actualiza el operador anterior con el operador actual y establece el buffer a '0'.
+
+-------------Explicacion-----------------
+Esta función parece ser parte de una calculadora o una aplicación similar y se encarga de manejar operaciones matemáticas. Aquí está la explicación línea por línea:
+
+La función handleMath toma un parámetro symbol, que es el símbolo de operación matemática que se va a aplicar.
+
+Dentro de la función, se verifica si el valor actual de buffer es igual a '0'. Si es así, la función sale temprano con return, lo que significa que no hay nada que hacer porque no hay valor para operar.
+
+Luego, el valor de buffer se convierte en un entero utilizando parseInt() y se almacena en la variable intBuffer.
+
+A continuación, se verifica si runningTotal es igual a 0. Si es así, significa que esta es la primera operación y intBuffer se asigna directamente a runningTotal.
+
+Si runningTotal no es igual a 0, significa que ya hay una operación en curso. En este caso, se llama a la función flushOperation(intBuffer) para realizar la operación pendiente utilizando el operador almacenado en previousOperator.
+
+Después de manejar la operación actual, se actualiza previousOperator con el nuevo símbolo de operación recibido.
+
+Finalmente, se restablece buffer a '0', listo para el siguiente número que el usuario ingrese.
+
+En resumen, esta función handleMath se encarga de manejar las operaciones matemáticas, almacenando los números ingresados y aplicando las operaciones pendientes según sea necesario.
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+La función flushOperation(intBuffer) realiza la operación pendiente basada en el operador anterior y el número proporcionado.
+
+--------------Explicacion-----------------
+
+Claro, esta porción de código parece ser parte de una función que realiza operaciones matemáticas basadas en el operador almacenado en la variable previousOperator. Aquí está la explicación línea por línea:
+
+if (previousOperator === '+'): Esta condición verifica si el operador almacenado en previousOperator es una adición (+). Si es así, el valor en intBuffer se suma al runningTotal.
+
+else if (previousOperator === '−'): Esta condición verifica si el operador almacenado en previousOperator es una resta (−). Si es así, el valor en intBuffer se resta del runningTotal.
+
+else if (previousOperator === '×'): Esta condición verifica si el operador almacenado en previousOperator es una multiplicación (×). Si es así, el runningTotal se multiplica por el valor en intBuffer.
+
+else if (previousOperator === '÷'): Esta condición verifica si el operador almacenado en previousOperator es una división (÷). Si es así, el runningTotal se divide por el valor en intBuffer.
+
+En resumen, este bloque de código realiza una operación matemática en base al operador almacenado en previousOperator y el valor en intBuffer, actualizando el runningTotal con el resultado de la operación correspondiente.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+La función handleNumber(numberString) maneja los números ingresados por el usuario. Si el buffer es '0', se establece como el número ingresado; de lo contrario, se concatena al buffer existente.
+
+--------------Explicacion--------------------
+La función handleNumber toma un parámetro numberString, que parece ser una cadena que representa un dígito numérico.
+
+Dentro de la función, se verifica si el valor actual de buffer es igual a "0". Esto puede indicar que el valor actual en buffer es cero o que es el primer dígito que se ingresa.
+
+Si buffer es igual a "0", se actualiza buffer con el valor de numberString. Esto significa que si buffer estaba vacío o contenía "0", ahora contendrá el número ingresado.
+
+Si buffer no es igual a "0", significa que ya hay un número en buffer. En este caso, el número ingresado se agrega al final de buffer utilizando el operador de concatenación +=.
+
+En resumen, esta función handleNumber se encarga de manejar la entrada de números en una calculadora o aplicación similar. Si no hay ningún número en buffer, coloca el número ingresado en buffer. Si ya hay un número en buffer, concatena el número ingresado al final del número existente en buffer.
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+La función init() se encarga de inicializar la calculadora. Agrega un evento de clic a todos los elementos con la clase "cal-btn", que llama a buttonClick con el texto del botón como argumento cuando se hace clic en ellos.
+
+
+
+
+APRENDER JS:
+
+
+
+Aquí tienes algunas recomendaciones de recursos para aprender JavaScript y llegar a un nivel en el que puedas entender y crear funciones como las que mencionaste:
+
+MDN Web Docs - JavaScript: La documentación de JavaScript en MDN es una excelente fuente de información para aprender sobre el lenguaje. Ofrece explicaciones detalladas, ejemplos de código y referencias sobre todos los aspectos del lenguaje JavaScript, desde conceptos básicos hasta funciones más avanzadas.
+
+Enlace: MDN Web Docs - JavaScript
+
+FreeCodeCamp: FreeCodeCamp es una plataforma de aprendizaje interactiva que ofrece cursos gratuitos sobre desarrollo web, incluido JavaScript. Los cursos están estructurados en módulos y te guían paso a paso desde los conceptos básicos hasta proyectos prácticos.
+
+Enlace: FreeCodeCamp
+
+JavaScript.info: Este es un recurso en línea que ofrece tutoriales completos sobre JavaScript, desde los conceptos básicos hasta temas más avanzados como funciones, objetos, manipulación del DOM, y más. Los tutoriales están bien explicados y contienen ejemplos de código útiles.
+
+Enlace: JavaScript.info
+
+Eloquent JavaScript by Marijn Haverbeke: Este libro es una excelente lectura para aquellos que desean profundizar en JavaScript. Cubre todo, desde los conceptos básicos hasta temas más avanzados como la programación funcional y la manipulación del DOM. Además, el libro está disponible de forma gratuita en línea.
+
+Enlace: Eloquent JavaScript
+
+Curso de JavaScript en Codecademy: Codecademy ofrece un curso interactivo de JavaScript que te guiará a través de los fundamentos del lenguaje. Proporciona ejercicios prácticos y proyectos para ayudarte a aplicar lo que aprendes.
+
+Enlace: Curso de JavaScript en Codecademy
+
+Estos recursos deberían proporcionarte una base sólida para aprender JavaScript y alcanzar el nivel necesario para comprender y crear funciones como las que has mencionado. Recuerda practicar regularmente y construir proyectos personales para consolidar tus conocimientos.
